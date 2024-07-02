@@ -11,9 +11,9 @@
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 import { TRPCError, initTRPC } from '@trpc/server'
+import { type OpenApiMeta } from 'trpc-openapi'
 import { createBaseLogger } from '~/lib/logger'
 import getIP from '~/utils/getClientIp'
-import { type OpenApiMeta } from 'trpc-openapi'
 import { env } from '~/env.mjs'
 import { APP_VERSION_HEADER_KEY } from '~/constants/version'
 import { defaultMeSelect } from './modules/me/me.select'
@@ -96,6 +96,19 @@ const loggerWithVersionMiddleware = loggerMiddleware.unstable_pipe(
   },
 )
 
+const contentTypeHeaderMiddleware = t.middleware(async ({ ctx, next }) => {
+  if (
+    ctx.req.body &&
+    !ctx.req.headers['content-type']?.startsWith('application/json')
+  ) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'Invalid Content-Type',
+    })
+  }
+  return next()
+})
+
 const baseMiddleware = t.middleware(async ({ ctx, next }) => {
   if (ctx.session === undefined) {
     throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR' })
@@ -133,9 +146,9 @@ const nonStrictAuthMiddleware = t.middleware(async ({ next, ctx }) => {
   // this code path is needed if a user does not exist in the database as they were deleted, but the session was active before
   const user = ctx.session?.userId
     ? await prisma.user.findUnique({
-      where: { id: ctx.session.userId },
-      select: defaultMeSelect,
-    })
+        where: { id: ctx.session.userId },
+        select: defaultMeSelect,
+      })
     : null
 
   return next({
@@ -157,6 +170,7 @@ export const { router } = t
  * */
 export const publicProcedure = t.procedure
   .use(loggerWithVersionMiddleware)
+  .use(contentTypeHeaderMiddleware)
   .use(baseMiddleware)
 
 /**
@@ -164,10 +178,12 @@ export const publicProcedure = t.procedure
  * */
 export const protectedProcedure = t.procedure
   .use(loggerWithVersionMiddleware)
+  .use(contentTypeHeaderMiddleware)
   .use(authMiddleware)
 
 export const agnosticProcedure = t.procedure
   .use(loggerWithVersionMiddleware)
+  .use(contentTypeHeaderMiddleware)
   .use(nonStrictAuthMiddleware)
 
 /**
