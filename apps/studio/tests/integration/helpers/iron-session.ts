@@ -56,7 +56,16 @@ export const createMockRequest = async (
 ): Promise<Context> => {
   const innerContext = await createContextInner({ session })
 
-  const { req, res } = createMocks(reqOptions, resOptions)
+  const { req, res } = createMocks(
+    {
+      ...reqOptions,
+      headers: {
+        'content-type': 'application/json', // will always be application/json
+        ...reqOptions.headers,
+      },
+    },
+    resOptions,
+  )
 
   return {
     ...innerContext,
