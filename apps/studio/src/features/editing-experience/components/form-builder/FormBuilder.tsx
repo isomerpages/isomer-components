@@ -1,9 +1,8 @@
-import { type JsonFormsRendererRegistryEntry } from '@jsonforms/core'
-import { JsonForms } from '@jsonforms/react'
+import { useState } from "react";
+import { type JsonFormsRendererRegistryEntry } from "@jsonforms/core";
+import { JsonForms } from "@jsonforms/react";
 
-import { useState } from 'react'
-import IsomerSchema from '../../data/0.1.0.json'
-
+import IsomerSchema from "../../data/0.1.0.json";
 import {
   JsonFormsArrayControl,
   jsonFormsArrayControlTester,
@@ -23,7 +22,7 @@ import {
   jsonFormsTextControlTester,
   jsonFormsVerticalLayoutRenderer,
   jsonFormsVerticalLayoutTester,
-} from './renderers'
+} from "./renderers";
 
 const renderers: JsonFormsRendererRegistryEntry[] = [
   { tester: jsonFormsArrayControlTester, renderer: JsonFormsArrayControl },
@@ -41,25 +40,25 @@ const renderers: JsonFormsRendererRegistryEntry[] = [
     tester: jsonFormsVerticalLayoutTester,
     renderer: jsonFormsVerticalLayoutRenderer,
   },
-]
+];
 
 export interface FormBuilderProps {
-  component: keyof typeof IsomerSchema.components.complex
+  component: keyof typeof IsomerSchema.components.complex;
 }
 
 export default function FormBuilder({
   component,
 }: FormBuilderProps): JSX.Element {
-  const { properties, ...rest } = IsomerSchema.components.complex[component]
+  const { properties, ...rest } = IsomerSchema.components.complex[component];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { type, ...props } = properties
+  const { type, ...props } = properties;
   const newSchema = {
     ...rest,
     properties: props,
     components: IsomerSchema.components,
-  }
+  };
 
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({});
 
   return (
     <JsonForms
@@ -67,9 +66,9 @@ export default function FormBuilder({
       data={formData}
       renderers={renderers}
       onChange={({ data }) => {
-        console.log(data)
-        setFormData(data)
+        console.log(data);
+        setFormData(data);
       }}
     />
-  )
+  );
 }
