@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import {
   BiChevronDown,
   BiChevronRight,
@@ -10,9 +10,10 @@ import {
   BiRightArrowAlt,
   BiSearch,
   BiX,
-} from "react-icons/bi"
-import type { NavbarProps } from "~/interfaces"
-import { LocalSearchInputBox, SearchSGInputBox } from "../../internal"
+} from "react-icons/bi";
+
+import type { NavbarProps } from "~/interfaces";
+import { LocalSearchInputBox, SearchSGInputBox } from "../../internal";
 
 export const Navbar = ({
   logoUrl,
@@ -22,55 +23,55 @@ export const Navbar = ({
   LinkComponent = "a",
   ScriptComponent = "script",
 }: Omit<NavbarProps, "type">) => {
-  const [openNavItemIdx, setOpenNavItemIdx] = useState(-1)
-  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [navbarDesktopHeight, setNavbarDesktopHeight] = useState(0)
-  const [siteHeaderBottomY, setSiteHeaderBottomY] = useState(0)
+  const [openNavItemIdx, setOpenNavItemIdx] = useState(-1);
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [navbarDesktopHeight, setNavbarDesktopHeight] = useState(0);
+  const [siteHeaderBottomY, setSiteHeaderBottomY] = useState(0);
 
   // Reference for navigation items bar on desktop
-  const navDesktopRef = useRef<HTMLUListElement>(null)
+  const navDesktopRef = useRef<HTMLUListElement>(null);
 
   // Reference for the site header
-  const siteHeaderRef = useRef<HTMLDivElement>(null)
+  const siteHeaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onResize = () => {
-      setNavbarDesktopHeight(siteHeaderRef.current?.offsetHeight || 0)
+      setNavbarDesktopHeight(siteHeaderRef.current?.offsetHeight || 0);
       setSiteHeaderBottomY(
         siteHeaderRef.current?.getBoundingClientRect().bottom || 0,
-      )
-    }
+      );
+    };
 
     const handleClickOutside = (event: MouseEvent) => {
       const viewportWidth = Math.max(
         document.documentElement.clientWidth || 0,
         window.innerWidth || 0,
-      )
+      );
 
       if (
         navDesktopRef.current &&
         !navDesktopRef.current.contains(event.target as Node) &&
         viewportWidth >= 1024 // Tailwind's lg breakpoint
       ) {
-        setOpenNavItemIdx(-1)
+        setOpenNavItemIdx(-1);
       }
-    }
+    };
 
-    onResize()
-    window.addEventListener("resize", onResize)
-    document.addEventListener("mousedown", handleClickOutside)
+    onResize();
+    window.addEventListener("resize", onResize);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      window.removeEventListener("resize", onResize)
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="relative flex flex-col">
       {/* Site header */}
       <div
-        className="max-w-container mx-auto flex w-full flex-row gap-4 px-6 py-6 lg:px-10"
+        className="mx-auto flex w-full max-w-container flex-row gap-4 px-6 py-6 lg:px-10"
         ref={siteHeaderRef}
       >
         {/* Logo */}
@@ -99,7 +100,7 @@ export const Navbar = ({
                       {name}
                     </LinkComponent>
                   </li>
-                )
+                );
               }
 
               return (
@@ -111,11 +112,11 @@ export const Navbar = ({
                         : "text-neutral-800"
                     }`}
                     onClick={() => {
-                      setIsSearchOpen(false)
+                      setIsSearchOpen(false);
                       if (openNavItemIdx === idx) {
-                        setOpenNavItemIdx(-1)
+                        setOpenNavItemIdx(-1);
                       } else {
-                        setOpenNavItemIdx(idx)
+                        setOpenNavItemIdx(idx);
                       }
                     }}
                   >
@@ -133,7 +134,7 @@ export const Navbar = ({
                     }}
                   >
                     <div className="mx-auto flex w-full max-w-screen-xl flex-col py-12">
-                      <div className="max-w-container mx-auto flex w-full flex-row items-start px-10 pb-12">
+                      <div className="mx-auto flex w-full max-w-container flex-row items-start px-10 pb-12">
                         <div className="flex flex-col gap-1">
                           <h6 className="text-2xl font-semibold">{name}</h6>
                           <p className="text-gray-700">{description}</p>
@@ -145,7 +146,7 @@ export const Navbar = ({
                         <button
                           onClick={() => setOpenNavItemIdx(-1)}
                           aria-label="Close navigation item"
-                          className="text-content text-sm lg:text-base"
+                          className="text-sm text-content lg:text-base"
                         >
                           Close
                           <BiX className="-mt-0.5 ml-1 inline text-2xl" />
@@ -153,12 +154,12 @@ export const Navbar = ({
                       </div>
 
                       <div className="overflow-auto">
-                        <ul className="max-w-container mx-auto flex w-full flex-row flex-wrap gap-x-36 gap-y-8 px-10">
+                        <ul className="mx-auto flex w-full max-w-container flex-row flex-wrap gap-x-36 gap-y-8 px-10">
                           {subItems.map((subItem) => (
                             <li key={subItem.name} className="w-2/5">
                               <div className="flex flex-col gap-1">
                                 <LinkComponent href={subItem.url}>
-                                  <p className="text-content text-pretty text-lg font-semibold hover:underline hover:underline-offset-2">
+                                  <p className="text-pretty text-lg font-semibold text-content hover:underline hover:underline-offset-2">
                                     {subItem.name}
                                     <BiRightArrowAlt className="-mt-0.5 inline h-auto w-5" />
                                   </p>
@@ -174,7 +175,7 @@ export const Navbar = ({
                     </div>
                   </div>
                 </li>
-              )
+              );
             })}
           </ul>
         </div>
@@ -210,8 +211,8 @@ export const Navbar = ({
           {isHamburgerOpen ? (
             <button
               onClick={() => {
-                setIsHamburgerOpen(false)
-                setOpenNavItemIdx(-1)
+                setIsHamburgerOpen(false);
+                setOpenNavItemIdx(-1);
               }}
               aria-label="Close navigation menu"
             >
@@ -221,8 +222,8 @@ export const Navbar = ({
           ) : (
             <button
               onClick={() => {
-                setIsHamburgerOpen(true)
-                setIsSearchOpen(false)
+                setIsHamburgerOpen(true);
+                setIsSearchOpen(false);
               }}
               aria-label="Open navigation menu"
               className="ml-5 mt-[3px]"
@@ -238,7 +239,7 @@ export const Navbar = ({
         <div
           className={`${
             isSearchOpen ? "block" : "hidden"
-          } max-w-container mx-auto mb-4 w-full px-6 lg:px-10`}
+          } mx-auto mb-4 w-full max-w-container px-6 lg:px-10`}
         >
           {search.type === "localSearch" && (
             <LocalSearchInputBox searchUrl={search.searchUrl} />
@@ -267,13 +268,13 @@ export const Navbar = ({
                 return (
                   <li key={Math.random()} className="w-full py-3">
                     <LinkComponent
-                      className="text-content hover:text-content-medium text-md block w-full"
+                      className="text-md block w-full text-content hover:text-content-medium"
                       href={url}
                     >
                       {name}
                     </LinkComponent>
                   </li>
-                )
+                );
               }
 
               return (
@@ -288,7 +289,7 @@ export const Navbar = ({
                     </div>
                   </button>
                 </li>
-              )
+              );
             })}
           </ul>
         </div>
@@ -319,12 +320,12 @@ export const Navbar = ({
                     <div className="flex flex-col gap-1">
                       <LinkComponent
                         href={url}
-                        className="text-paragraph-01 text-content-medium md:text-content"
+                        className="text-content-medium text-paragraph-01 md:text-content"
                       >
                         {name}
                         <BiRightArrowAlt className="-mt-0.5 ml-1 hidden text-lg md:inline" />
                       </LinkComponent>
-                      <p className="text-paragraph-02 text-content-medium hidden md:block">
+                      <p className="hidden text-content-medium text-paragraph-02 md:block">
                         {description}
                       </p>
                     </div>
@@ -336,7 +337,7 @@ export const Navbar = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -1,13 +1,14 @@
-import { BiRightArrowAlt } from "react-icons/bi"
-import { HomepageSectionWrapper } from "../HomepageSectionWrapper"
-import type { InfopicProps } from "~/interfaces"
+import { BiRightArrowAlt } from "react-icons/bi";
+
+import type { InfopicProps } from "~/interfaces";
+import { HomepageSectionWrapper } from "../HomepageSectionWrapper";
 
 const InfopicContentWrapper = ({
   children,
   shouldShowMobile,
 }: {
-  children: JSX.Element | JSX.Element[]
-  shouldShowMobile: boolean
+  children: JSX.Element | JSX.Element[];
+  shouldShowMobile: boolean;
 }) => (
   <div
     className={`mx-auto px-6 py-12 md:grid md:grid-cols-2 md:gap-x-16 md:p-16 xl:max-w-7xl ${
@@ -16,7 +17,7 @@ const InfopicContentWrapper = ({
   >
     {children}
   </div>
-)
+);
 
 const TextComponent = ({
   title,
@@ -28,7 +29,7 @@ const TextComponent = ({
   return (
     <div className="flex flex-col gap-4 lg:px-8">
       {subtitle && (
-        <p className="tracking-widest uppercase text-subtitle">{subtitle}</p>
+        <p className="uppercase tracking-widest text-subtitle">{subtitle}</p>
       )}
       <h1 className="text-5xl font-semibold text-site-secondary">{title}</h1>
       {description && <p className="text-xl text-paragraph">{description}</p>}
@@ -53,15 +54,15 @@ const TextComponent = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 const ImageComponent = ({
   src,
   alt,
 }: {
-  src: InfopicProps["imageSrc"]
-  alt: InfopicProps["imageAlt"]
+  src: InfopicProps["imageSrc"];
+  alt: InfopicProps["imageAlt"];
 }) => {
   return (
     <div className="mt-12 md:row-span-2 md:mt-0">
@@ -73,8 +74,8 @@ const ImageComponent = ({
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const InfoPic = ({
   sectionIndex,
@@ -125,7 +126,7 @@ const InfoPic = ({
         <ImageComponent src={src} alt={alt} />
       </InfopicContentWrapper>
     </HomepageSectionWrapper>
-  )
-}
+  );
+};
 
-export default InfoPic
+export default InfoPic;

@@ -1,12 +1,12 @@
-import type { ButtonProps } from "~/interfaces"
+import type { ButtonProps } from "~/interfaces";
 
 // Classic Button does not use much from ButtonProps, e.g bg colour is always site's secondary colour
 const Button = ({ label, href }: ButtonProps) => {
   const Label = () => (
-    <span className="tracking-wider text-center uppercase text-white">
+    <span className="text-center uppercase tracking-wider text-white">
       {label}
     </span>
-  )
+  );
 
   return (
     <a
@@ -18,7 +18,7 @@ const Button = ({ label, href }: ButtonProps) => {
     >
       <Label />
     </a>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

@@ -4,24 +4,31 @@
   "description": "Isomer Next",
   "private": true,
   "scripts": {
-    "build": "dotenv -- turbo build",
-    "clean": "turbo clean",
-    "dev": "dotenv -- turbo run dev",
+    "build": "turbo build",
+    "dev": "turbo run dev",
     "setup:test": "turbo setup:test",
-    "storybook": "dotenv -- turbo run storybook --parallel",
+    "storybook": "turbo run storybook --parallel",
     "storybook:build": "turbo run storybook:build --parallel",
     "teardown": "turbo teardown",
-    "test-start": "turbo test-start"
+    "test-start": "turbo test-start",
+    "clean": "git clean -xdf node_modules",
+    "clean:workspaces": "turbo clean",
+    "clean:all": "pnpm clean:workspaces && pnpm clean",
+    "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache --ignore-path ./.prettierignore",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache  --ignore-path ./.prettierignore",
+    "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:ws": "pnpm dlx sherif@latest",
+    "postinstall": "pnpm lint:ws",
+    "typecheck": "turbo typecheck"
   },
-  "workspaces": [
-    "docs",
-    "apps/*",
-    "packages/*"
-  ],
   "author": "Isomer Team",
   "license": "ISC",
   "devDependencies": {
-    "turbo": "^2.0.5"
+    "@isomer/prettier-config": "workspace:*",
+    "turbo": "^2.0.5",
+    "typescript": "5.5.3"
   },
-  "packageManager": "npm@10.2.3"
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74",
+  "prettier": "@isomer/prettier-config"
 }

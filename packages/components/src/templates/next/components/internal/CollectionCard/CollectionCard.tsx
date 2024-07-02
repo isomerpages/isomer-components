@@ -3,18 +3,18 @@ import type {
   CollectionCardProps,
   FileCardProps,
   LinkCardProps,
-} from "~/interfaces/internal/CollectionCard"
+} from "~/interfaces/internal/CollectionCard";
 
 const ImageComponent = ({ image }: Pick<CollectionCardProps, "image">) => {
-  if (!image) return null
+  if (!image) return null;
   return (
     <img
       src={image.src}
       alt={image.alt}
       className="max-h-56 w-full rounded-lg object-cover"
     />
-  )
-}
+  );
+};
 
 const ArticleTextComponent = ({
   lastUpdated,
@@ -29,22 +29,22 @@ const ArticleTextComponent = ({
     <div className="flex flex-col gap-3 sm:gap-8">
       <div className={`flex flex-col gap-3`}>
         <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
-          <p className="text-caption-01 text-content-medium">{lastUpdated}</p>
-          <p className="text-caption-01 text-content-medium hidden sm:block">
+          <p className="text-content-medium text-caption-01">{lastUpdated}</p>
+          <p className="hidden text-content-medium text-caption-01 sm:block">
             |
           </p>
-          <p className="text-caption-01 text-content-strong">{category}</p>
+          <p className="text-content-strong text-caption-01">{category}</p>
         </div>
-        <h4 className="text-heading-04 line-clamp-3 sm:line-clamp-2">
+        <h4 className="line-clamp-3 text-heading-04 sm:line-clamp-2">
           {title}
         </h4>
-        <p className="text-paragraph-02 text-content-medium line-clamp-3 sm:line-clamp-2">
+        <p className="line-clamp-3 text-content-medium text-paragraph-02 sm:line-clamp-2">
           {description}
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const FileTextComponent = ({
   lastUpdated,
@@ -60,27 +60,27 @@ const FileTextComponent = ({
     <div className="flex flex-col gap-3 sm:gap-8">
       <div className={`flex flex-col gap-3`}>
         <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
-          <p className="text-caption-01 text-content-medium">{lastUpdated}</p>
-          <p className="text-caption-01 text-content-medium hidden sm:block">
+          <p className="text-content-medium text-caption-01">{lastUpdated}</p>
+          <p className="hidden text-content-medium text-caption-01 sm:block">
             |
           </p>
-          <p className="text-caption-01 text-content-strong">{category}</p>
+          <p className="text-content-strong text-caption-01">{category}</p>
         </div>
-        <h4 className="text-heading-04 line-clamp-3 sm:line-clamp-2">
+        <h4 className="line-clamp-3 text-heading-04 sm:line-clamp-2">
           {`(${fileDetails.type.toUpperCase()}) ${title}`}
         </h4>
-        <p className="text-paragraph-02 text-content-medium line-clamp-3 sm:line-clamp-2">
+        <p className="line-clamp-3 text-content-medium text-paragraph-02 sm:line-clamp-2">
           {description}
         </p>
       </div>
       {
-        <div className="text-paragraph-01 text-hyperlink underline underline-offset-2">{`Download (${fileDetails.type.toUpperCase()}, ${
+        <div className="text-hyperlink underline underline-offset-2 text-paragraph-01">{`Download (${fileDetails.type.toUpperCase()}, ${
           fileDetails.size
         })`}</div>
       }
     </div>
-  )
-}
+  );
+};
 
 const ArticleCard = ({
   url,
@@ -93,7 +93,7 @@ const ArticleCard = ({
 }: Omit<ArticleCardProps | LinkCardProps, "type">) => {
   return (
     <LinkComponent href={url}>
-      <div className="border-divider-medium text-content hover:text-hyperlink-hover flex flex-col gap-6 border-y py-6 sm:flex-row">
+      <div className="flex flex-col gap-6 border-y border-divider-medium py-6 text-content hover:text-hyperlink-hover sm:flex-row">
         <ArticleTextComponent
           lastUpdated={lastUpdated}
           category={category}
@@ -103,8 +103,8 @@ const ArticleCard = ({
         <ImageComponent image={image} />
       </div>
     </LinkComponent>
-  )
-}
+  );
+};
 
 const FileCard = ({
   url,
@@ -117,7 +117,7 @@ const FileCard = ({
 }: Omit<FileCardProps, "type">) => {
   return (
     <a href={url}>
-      <div className="border-divider-medium text-content hover:text-hyperlink-hover flex flex-col gap-6 border-y py-6 sm:flex-row">
+      <div className="flex flex-col gap-6 border-y border-divider-medium py-6 text-content hover:text-hyperlink-hover sm:flex-row">
         <FileTextComponent
           lastUpdated={lastUpdated}
           category={category}
@@ -128,21 +128,21 @@ const FileCard = ({
         <ImageComponent image={image} />
       </div>
     </a>
-  )
-}
+  );
+};
 
 type DistributiveOmit<T, K extends PropertyKey> = T extends any
   ? Omit<T, K>
-  : never
+  : never;
 
 const Card = (props: DistributiveOmit<CollectionCardProps, "type">) => {
   if (props.variant === "file") {
-    return <FileCard {...props} />
+    return <FileCard {...props} />;
   } else if (props.variant === "article" || props.variant === "link") {
-    return <ArticleCard {...props} />
+    return <ArticleCard {...props} />;
   }
 
-  return <></>
-}
+  return <></>;
+};
 
-export default Card
+export default Card;

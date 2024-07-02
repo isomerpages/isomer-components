@@ -1,18 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { BiCheck, BiChevronDown } from "react-icons/bi"
-import { SortDirection, SortKey } from "~/interfaces/internal/CollectionSort"
-import CollectionSortProps from "~/templates/next/types/CollectionSort"
+import { useState } from "react";
+import { BiCheck, BiChevronDown } from "react-icons/bi";
+
+import type {
+  SortDirection,
+  SortKey,
+} from "~/interfaces/internal/CollectionSort";
+import type CollectionSortProps from "~/templates/next/types/CollectionSort";
 
 interface SortConfig {
-  sortBy: SortKey
-  sortDirection: SortDirection
+  sortBy: SortKey;
+  sortDirection: SortDirection;
 }
 
-const SortOptions = ["Most recent", "Least recent"] as const
+const SortOptions = ["Most recent", "Least recent"] as const;
 
-type SortOption = (typeof SortOptions)[number]
+type SortOption = (typeof SortOptions)[number];
 
 const SortOptionToConfigMap: Record<SortOption, SortConfig> = {
   "Most recent": {
@@ -23,7 +27,7 @@ const SortOptionToConfigMap: Record<SortOption, SortConfig> = {
     sortBy: "date",
     sortDirection: "asc",
   },
-}
+};
 
 const SortConfigToOptionMap: Record<
   SortKey,
@@ -33,7 +37,7 @@ const SortConfigToOptionMap: Record<
     desc: "Most recent",
     asc: "Least recent",
   },
-}
+};
 
 const CollectionSort = ({
   sortBy,
@@ -41,8 +45,8 @@ const CollectionSort = ({
   sortDirection,
   setSortDirection,
 }: CollectionSortProps) => {
-  const [showSortOptions, setShowSortOptions] = useState(false)
-  const selectedSortOption = SortConfigToOptionMap[sortBy][sortDirection]
+  const [showSortOptions, setShowSortOptions] = useState(false);
+  const selectedSortOption = SortConfigToOptionMap[sortBy][sortDirection];
 
   return (
     <div className="relative">
@@ -50,7 +54,7 @@ const CollectionSort = ({
         <button
           className={`flex justify-between gap-6 rounded-[4px] border px-4 py-2.5 ${
             showSortOptions
-              ? "border-focus-outline outline-focus-outline outline outline-1"
+              ? "border-focus-outline outline outline-1 outline-focus-outline"
               : "border-divider-medium"
           }`}
           aria-label={
@@ -72,13 +76,13 @@ const CollectionSort = ({
           {SortOptions.map((option) => (
             <button
               key={option}
-              className={`hover:bg-interaction-main-subtle-hover flex w-full items-center justify-between rounded-[4px] px-4 py-2.5 text-left ${
-                option === selectedSortOption && "border-focus-outline border-2"
+              className={`flex w-full items-center justify-between rounded-[4px] px-4 py-2.5 text-left hover:bg-interaction-main-subtle-hover ${
+                option === selectedSortOption && "border-2 border-focus-outline"
               }`}
               onClick={() => {
-                setSortBy(SortOptionToConfigMap[option].sortBy)
-                setSortDirection(SortOptionToConfigMap[option].sortDirection)
-                setShowSortOptions(false)
+                setSortBy(SortOptionToConfigMap[option].sortBy);
+                setSortDirection(SortOptionToConfigMap[option].sortDirection);
+                setShowSortOptions(false);
               }}
             >
               {option}
@@ -90,7 +94,7 @@ const CollectionSort = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CollectionSort
+export default CollectionSort;

@@ -1,69 +1,70 @@
-import type { ColumnType, GeneratedAlways } from "kysely"
+import type { ColumnType, GeneratedAlways } from "kysely";
+
+import type { RoleType } from "./generatedEnums";
+
 export type Generated<T> =
   T extends ColumnType<infer S, infer I, infer U>
     ? ColumnType<S, I | undefined, U>
-    : ColumnType<T, T | undefined, T>
-export type Timestamp = ColumnType<Date, Date | string, Date | string>
+    : ColumnType<T, T | undefined, T>;
+export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
-import type { RoleType } from "./generatedEnums"
-
-export type Blob = {
-  id: GeneratedAlways<number>
-  content: unknown
+export interface Blob {
+  id: GeneratedAlways<number>;
+  content: unknown;
 }
-export type Footer = {
-  id: GeneratedAlways<number>
-  siteId: number
-  content: unknown
+export interface Footer {
+  id: GeneratedAlways<number>;
+  siteId: number;
+  content: unknown;
 }
-export type Navbar = {
-  id: GeneratedAlways<number>
-  siteId: number
-  content: unknown
+export interface Navbar {
+  id: GeneratedAlways<number>;
+  siteId: number;
+  content: unknown;
 }
-export type Permission = {
-  id: GeneratedAlways<number>
-  resourceId: number
-  userId: string
-  role: RoleType
+export interface Permission {
+  id: GeneratedAlways<number>;
+  resourceId: number;
+  userId: string;
+  role: RoleType;
 }
-export type Resource = {
-  id: GeneratedAlways<number>
-  name: string
-  siteId: number
-  parentId: number | null
-  blobId: number | null
+export interface Resource {
+  id: GeneratedAlways<number>;
+  name: string;
+  siteId: number;
+  parentId: number | null;
+  blobId: number | null;
 }
-export type Site = {
-  id: GeneratedAlways<number>
-  name: string
-  config: unknown
+export interface Site {
+  id: GeneratedAlways<number>;
+  name: string;
+  config: unknown;
 }
-export type SiteMember = {
-  userId: string
-  siteId: number
+export interface SiteMember {
+  userId: string;
+  siteId: number;
 }
-export type User = {
-  id: string
-  name: string
-  email: string
-  phone: string
-  preferredName: string | null
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  preferredName: string | null;
 }
-export type VerificationToken = {
-  identifier: string
-  token: string
-  attempts: Generated<number>
-  expires: Timestamp
+export interface VerificationToken {
+  identifier: string;
+  token: string;
+  attempts: Generated<number>;
+  expires: Timestamp;
 }
-export type DB = {
-  Blob: Blob
-  Footer: Footer
-  Navbar: Navbar
-  Permission: Permission
-  Resource: Resource
-  Site: Site
-  SiteMember: SiteMember
-  User: User
-  VerificationToken: VerificationToken
+export interface DB {
+  Blob: Blob;
+  Footer: Footer;
+  Navbar: Navbar;
+  Permission: Permission;
+  Resource: Resource;
+  Site: Site;
+  SiteMember: SiteMember;
+  User: User;
+  VerificationToken: VerificationToken;
 }

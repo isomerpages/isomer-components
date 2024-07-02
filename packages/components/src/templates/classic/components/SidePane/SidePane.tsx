@@ -1,10 +1,11 @@
-import { BiChevronDown } from "react-icons/bi"
-import type { SidePaneProps } from "~/interfaces"
+import { BiChevronDown } from "react-icons/bi";
 
-export type SectionWithSiblings = {
-  parentTitle?: string
-  parentPermalink?: string
-  siblings: any[]
+import type { SidePaneProps } from "~/interfaces";
+
+export interface SectionWithSiblings {
+  parentTitle?: string;
+  parentPermalink?: string;
+  siblings: any[];
 }
 
 const SidePane = ({ sitemap, currentPermalink }: SidePaneProps) => {
@@ -17,32 +18,32 @@ const SidePane = ({ sitemap, currentPermalink }: SidePaneProps) => {
       if (section.paths) {
         const match = section.paths.find(
           (child: any) => child.permalink === currentPermalink,
-        )
+        );
         if (match) {
           // Exact match found, return the current section's siblings and parent title
           return {
             parentTitle: section.title,
             parentPermalink: section.permalink, // This is the title of the dropdown
             siblings: section.paths, // These are the items in the dropdown
-          }
+          };
         }
 
         // Recursively check in child paths
-        const found = findSectionAndSiblings(section.paths, currentPermalink)
-        if (found) return found
+        const found = findSectionAndSiblings(section.paths, currentPermalink);
+        if (found) return found;
       }
     }
-    return null // Not found
+    return null; // Not found
   }
 
   const sectionWithSiblings = findSectionAndSiblings(
     sitemap.paths,
     currentPermalink,
-  )
+  );
   const parentNodeSiblings = findSectionAndSiblings(
     sitemap.paths,
     sectionWithSiblings?.parentPermalink || "",
-  )
+  );
 
   return (
     <aside className="w-64">
@@ -72,7 +73,7 @@ const SidePane = ({ sitemap, currentPermalink }: SidePaneProps) => {
                     {sibling.permalink ===
                       sectionWithSiblings?.parentPermalink &&
                       sectionWithSiblings?.siblings &&
-                      sectionWithSiblings?.siblings.length > 0 && (
+                      sectionWithSiblings.siblings.length > 0 && (
                         <a className="cursor-pointer">
                           <BiChevronDown className="mx-3 mt-2.5 h-5 w-5 text-headings" />
                         </a>
@@ -101,7 +102,7 @@ const SidePane = ({ sitemap, currentPermalink }: SidePaneProps) => {
         )}
       </ul>
     </aside>
-  )
-}
+  );
+};
 
-export default SidePane
+export default SidePane;

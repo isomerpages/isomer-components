@@ -1,6 +1,6 @@
-import type { ArticlePageHeaderProps } from "~/interfaces"
-import BaseParagraph from "../BaseParagraph"
-import Breadcrumb from "../Breadcrumb"
+import type { ArticlePageHeaderProps } from "~/interfaces";
+import BaseParagraph from "../BaseParagraph";
+import Breadcrumb from "../Breadcrumb";
 
 const ArticlePageHeader = ({
   breadcrumb,
@@ -19,7 +19,7 @@ const ArticlePageHeader = ({
       <div className="mb-3 text-base font-medium text-gray-600">{category}</div>
 
       <div className="flex flex-col gap-5">
-        <h1 className="text-content-strong text-3xl font-semibold tracking-tight lg:text-4xl">
+        <h1 className="text-3xl font-semibold tracking-tight text-content-strong lg:text-4xl">
           {title}
         </h1>
         <p className="text-sm text-gray-800">{date}</p>
@@ -39,7 +39,7 @@ const ArticlePageHeader = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ArticlePageHeader
+export default ArticlePageHeader;

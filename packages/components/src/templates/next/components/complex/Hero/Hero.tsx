@@ -5,9 +5,9 @@ import type {
   HeroGradientProps,
   HeroProps,
   HeroSplitProps,
-} from "~/interfaces/complex/Hero"
-import { ComponentContent } from "../../internal/customCssClass"
-import Button from "../Button"
+} from "~/interfaces/complex/Hero";
+import { ComponentContent } from "../../internal/customCssClass";
+import Button from "../Button";
 
 const HeroGradient = ({
   alignment = "left",
@@ -37,7 +37,7 @@ const HeroGradient = ({
           } ${alignment === "left" ? "text-start" : "text-end"}`}
         >
           <div className="flex w-full flex-col gap-6 sm:w-3/5 xl:max-w-[520px]">
-            <h1 className="text-heading-01 font-bold">{title}</h1>
+            <h1 className="font-bold text-heading-01">{title}</h1>
             {subtitle && <p className="text-paragraph-01">{subtitle}</p>}
             {buttonLabel && buttonUrl && (
               <div
@@ -64,8 +64,8 @@ const HeroGradient = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 const HeroSplit = ({
   alignment = "left",
@@ -78,8 +78,8 @@ const HeroSplit = ({
   secondaryButtonUrl,
   backgroundUrl,
 }: HeroSplitProps) => {
-  const bgColor = backgroundColor === "black" ? "bg-canvas-dark" : "bg-white"
-  const textColor = backgroundColor === "black" ? "text-white" : "text-black"
+  const bgColor = backgroundColor === "black" ? "bg-canvas-dark" : "bg-white";
+  const textColor = backgroundColor === "black" ? "text-white" : "text-black";
 
   return (
     <>
@@ -145,8 +145,8 @@ const HeroSplit = ({
         />
       </section>
     </>
-  )
-}
+  );
+};
 
 const HeroFloating = ({
   alignment = "left",
@@ -159,8 +159,8 @@ const HeroFloating = ({
   secondaryButtonUrl,
   backgroundUrl,
 }: Omit<HeroFloatingProps, "variant">) => {
-  const bgColor = backgroundColor === "black" ? "bg-canvas-dark" : "bg-white"
-  const textColor = backgroundColor === "black" ? "text-white" : "text-black"
+  const bgColor = backgroundColor === "black" ? "bg-canvas-dark" : "bg-white";
+  const textColor = backgroundColor === "black" ? "text-white" : "text-black";
 
   return (
     <section className="flex min-h-[15rem] sm:min-h-[22.5rem] md:min-h-[31.25rem]">
@@ -209,8 +209,8 @@ const HeroFloating = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 const HeroCopyLed = ({
   title,
@@ -223,7 +223,7 @@ const HeroCopyLed = ({
 }: Omit<HeroCopyLedProps, "variant">) => {
   return (
     <section className="h-px min-h-[15rem] sm:min-h-[22.5rem] md:min-h-[31.25rem]">
-      <div className="bg-site-primary-200 flex w-full flex-row justify-center">
+      <div className="flex w-full flex-row justify-center bg-site-primary-200">
         <div
           className={`${ComponentContent} flex w-4/5 flex-col items-center gap-6 py-16 text-center md:items-start md:text-start lg:w-3/4`}
         >
@@ -257,8 +257,8 @@ const HeroCopyLed = ({
         ></div>
       )}
     </section>
-  )
-}
+  );
+};
 
 const HeroFloatingImage = ({
   title,
@@ -272,7 +272,7 @@ const HeroFloatingImage = ({
   return (
     <>
       <section className="hidden min-h-[15rem] sm:min-h-[22.5rem] md:block md:min-h-[31.25rem]">
-        <div className="bg-site-primary-200 flex w-full flex-row justify-center">
+        <div className="flex w-full flex-row justify-center bg-site-primary-200">
           <div
             className={`${ComponentContent} flex w-4/5 flex-row gap-24 py-16 lg:w-3/4`}
           >
@@ -317,8 +317,8 @@ const HeroFloatingImage = ({
         />
       </section>
     </>
-  )
-}
+  );
+};
 
 const Hero = (props: HeroProps) => {
   return (
@@ -329,7 +329,7 @@ const Hero = (props: HeroProps) => {
       {props.variant === "copyled" && <HeroCopyLed {...props} />}
       {props.variant === "floatingimage" && <HeroFloatingImage {...props} />}
     </>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

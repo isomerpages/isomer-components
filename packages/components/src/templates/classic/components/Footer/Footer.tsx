@@ -1,5 +1,6 @@
-import { Footer } from "@govtechsg/sgds-react/Footer"
-import type { FooterProps } from "~/interfaces"
+import { Footer } from "@govtechsg/sgds-react/Footer";
+
+import type { FooterProps } from "~/interfaces";
 
 const IsomerFooter = ({ agencyName, siteNavItems }: FooterProps) => {
   return (
@@ -7,7 +8,7 @@ const IsomerFooter = ({ agencyName, siteNavItems }: FooterProps) => {
       <Footer.Top>
         <Footer.Top.Header headerTitle={agencyName} />
         <Footer.Top.ItemGroup>
-          {siteNavItems?.map((item) => {
+          {siteNavItems.map((item) => {
             return (
               <Footer.Top.Item key={`footer-item-${item.title}`}>
                 <a href={item.url} className="-mt-8 font-bold">
@@ -24,7 +25,7 @@ const IsomerFooter = ({ agencyName, siteNavItems }: FooterProps) => {
                   )
                 })} */}
               </Footer.Top.Item>
-            )
+            );
           })}
         </Footer.Top.ItemGroup>
         <Footer.Top.ContactLinks>
@@ -57,7 +58,7 @@ const IsomerFooter = ({ agencyName, siteNavItems }: FooterProps) => {
         </Footer.Bottom.Copyrights> */}
       </Footer.Bottom>
     </Footer>
-  )
-}
+  );
+};
 
-export default IsomerFooter
+export default IsomerFooter;

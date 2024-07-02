@@ -1,9 +1,10 @@
-import { BiRightArrowAlt } from "react-icons/bi"
-import type { SingleCardProps } from "~/interfaces/complex/InfoCards"
+import { BiRightArrowAlt } from "react-icons/bi";
+
+import type { SingleCardProps } from "~/interfaces/complex/InfoCards";
 
 interface CardProps extends SingleCardProps {
-  variant?: "horizontal" | "vertical"
-  className?: string
+  variant?: "horizontal" | "vertical";
+  className?: string;
 }
 
 const ImageComponent = ({
@@ -11,9 +12,9 @@ const ImageComponent = ({
   alt,
   className,
 }: {
-  src: SingleCardProps["imageUrl"]
-  alt: SingleCardProps["imageAlt"]
-  className?: string
+  src: SingleCardProps["imageUrl"];
+  alt: SingleCardProps["imageAlt"];
+  className?: string;
 }) => {
   return (
     <div className={`aspect-h-1 aspect-w-1 overflow-hidden ${className}`}>
@@ -23,8 +24,8 @@ const ImageComponent = ({
         className="h-full w-full object-cover object-center"
       />
     </div>
-  )
-}
+  );
+};
 
 const TextComponent = ({
   title,
@@ -33,11 +34,11 @@ const TextComponent = ({
   className,
   url,
 }: {
-  text: SingleCardProps["description"]
-  title: SingleCardProps["title"]
-  buttonLabel: SingleCardProps["buttonLabel"]
-  className?: string
-  url: string
+  text: SingleCardProps["description"];
+  title: SingleCardProps["title"];
+  buttonLabel: SingleCardProps["buttonLabel"];
+  className?: string;
+  url: string;
 }) => {
   return (
     <div
@@ -45,12 +46,12 @@ const TextComponent = ({
     >
       <div className="flex flex-col gap-3">
         {title && (
-          <h4 className="text-heading-04 text-content-strong line-clamp-2">
+          <h4 className="line-clamp-2 text-content-strong text-heading-04">
             {title}
           </h4>
         )}
         {text && (
-          <p className="text-content line-clamp-4 grow text-left text-base sm:text-lg">
+          <p className="line-clamp-4 grow text-left text-base text-content sm:text-lg">
             {text}
           </p>
         )}
@@ -65,7 +66,7 @@ const TextComponent = ({
                 ? "noopener noreferrer nofollow"
                 : undefined
             }
-            className="text-interaction-link font-medium after:absolute after:inset-0"
+            className="font-medium text-interaction-link after:absolute after:inset-0"
           >
             {buttonLabel}
           </a>
@@ -73,8 +74,8 @@ const TextComponent = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 const Card = ({
   title,
@@ -90,7 +91,7 @@ const Card = ({
     <div
       className={`relative flex ${
         variant === "horizontal" ? "flex-row" : "flex-col"
-      } outline-divider-medium gap-1 rounded-md outline hover:opacity-80 ${className}`}
+      } gap-1 rounded-md outline outline-divider-medium hover:opacity-80 ${className}`}
     >
       {variant === "horizontal" ? (
         <>
@@ -123,7 +124,7 @@ const Card = ({
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

@@ -1,16 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { BiLeftArrowAlt } from "react-icons/bi"
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md"
-import type { SiderailProps } from "~/interfaces"
+import { useState } from "react";
+import { BiLeftArrowAlt } from "react-icons/bi";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+
+import type { SiderailProps } from "~/interfaces";
 
 const SiderailMobile = ({
   parentTitle,
   pages,
   LinkComponent = "a",
 }: Omit<SiderailProps, "type">) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="relative lg:hidden">
       <button
@@ -20,7 +21,7 @@ const SiderailMobile = ({
           isExpanded ? "Collapse" : "Expand"
         } local navigation menu`}
       >
-        <h4 className="text-heading-04-medium text-content-strong">
+        <h4 className="text-content-strong text-heading-04-medium">
           {parentTitle}
         </h4>
         {isExpanded ? (
@@ -35,7 +36,7 @@ const SiderailMobile = ({
           {pages.map(({ url, title, isCurrent, childPages }) => {
             return (
               <li
-                className="text-paragraph-03 border-b border-divider-medium text-content"
+                className="border-b border-divider-medium text-content text-paragraph-03"
                 aria-current={isCurrent ? "page" : undefined}
               >
                 {isCurrent ? (
@@ -62,18 +63,18 @@ const SiderailMobile = ({
                             {title}
                           </LinkComponent>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 )}
               </li>
-            )
+            );
           })}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
 const SiderailDesktop = ({
   parentTitle,
@@ -88,7 +89,7 @@ const SiderailDesktop = ({
         className="flex items-start gap-2 border-b-2 border-black pb-2"
       >
         <BiLeftArrowAlt className="h-9 w-6 flex-shrink-0" />
-        <h4 className="text-heading-04-medium text-content-strong">
+        <h4 className="text-content-strong text-heading-04-medium">
           {parentTitle}
         </h4>
       </LinkComponent>
@@ -126,17 +127,17 @@ const SiderailDesktop = ({
                           {title}
                         </LinkComponent>
                       </li>
-                    )
+                    );
                   })}
                 </ul>
               )}
             </li>
-          )
+          );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export const Siderail = (props: SiderailProps) => {
   return (
@@ -144,7 +145,7 @@ export const Siderail = (props: SiderailProps) => {
       <SiderailMobile {...props} />
       <SiderailDesktop {...props} />
     </>
-  )
-}
+  );
+};
 
-export default Siderail
+export default Siderail;

@@ -9,4 +9,4 @@ export const JSON_FORMS_RANKING = {
   ProseControl: 2,
   RadioControl: 3,
   VerticalLayoutRenderer: 1,
-}
+};
